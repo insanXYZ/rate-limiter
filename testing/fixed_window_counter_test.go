@@ -9,12 +9,11 @@ import (
 	"time"
 )
 
-func TestTokenBucket(t *testing.T) {
-	tb := rl.NewTokenBucket(5, 1)
+func TestFixedWindowCounter(t *testing.T) {
+	fixedWindowCounter := rl.NewFixedWindowCounter(5)
 
 	utils.SetInterval(500*time.Millisecond, func() {
-		statusCode := tb.Remove()
+		statusCode := fixedWindowCounter.Add()
 		fmt.Println("statusCode = " + strconv.Itoa(statusCode))
 	})
-
 }
